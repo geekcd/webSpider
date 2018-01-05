@@ -14,49 +14,49 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-//Ğ´Ò»¸öÅÀ³æÀà£¬Ìá¹©Ò»Ğ©·½·¨£º
-   /*    Ìá¹©¹¹Ôì·½·¨£¬¿ÉÒÔ´´½¨Ò»¸öÅÀ³æ¶ÔÏó
-    *    Ìá¹©Ò»Ğ©·½·¨£º
-    *    1.»ñµÃÕâ¸öÍøÖ·µÄhtmlÎÄ¼ş,µ½Ö¸¶¨µÄÎÄ¼ş¼ĞÏÂ
-    *    2.»ñµÃÕâ¸öÍøÖ·ÏÂµÄ¶ÔÓ¦ĞÅÏ¢Á´½Ó£¨·µ»ØÒ»¸ö×Ö·û´®Êı×é£©£»
-    *    3.ÏÂÔØÊı¾İĞÅÏ¢µ½Ö¸¶¨µÄÎÄ¼ş¼ĞÏÂ£»
+//å†™ä¸€ä¸ªçˆ¬è™«ç±»ï¼Œæä¾›ä¸€äº›æ–¹æ³•ï¼š
+   /*    æä¾›æ„é€ æ–¹æ³•ï¼Œå¯ä»¥åˆ›å»ºä¸€ä¸ªçˆ¬è™«å¯¹è±¡
+    *    æä¾›ä¸€äº›æ–¹æ³•ï¼š
+    *    1.è·å¾—è¿™ä¸ªç½‘å€çš„htmlæ–‡ä»¶,åˆ°æŒ‡å®šçš„æ–‡ä»¶å¤¹ä¸‹
+    *    2.è·å¾—è¿™ä¸ªç½‘å€ä¸‹çš„å¯¹åº”ä¿¡æ¯é“¾æ¥ï¼ˆè¿”å›ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„ï¼‰ï¼›
+    *    3.ä¸‹è½½æ•°æ®ä¿¡æ¯åˆ°æŒ‡å®šçš„æ–‡ä»¶å¤¹ä¸‹ï¼›
     *    
     * 
     * */
   
 class SimpleSpider {
-					  //³ÉÔ±±äÁ¿
+					  //æˆå‘˜å˜é‡
 					  private String url;
 					
-					  //¹¹Ôìº¯Êı1
+					  //æ„é€ å‡½æ•°1
 				      public SimpleSpider(String url) {
 				    	 
 				    	  this.url = url;
 				        }
-				     //ÎŞ²Î¹¹Ôì
+				     //æ— å‚æ„é€ 
 				      public SimpleSpider() {
 						
 	                   }
 
-	//Õâ¸ö³ÉÔ±·½·¨ÓÃÀ´Ä¿Â¼ÍøÖ·ÏÂµÄµÄ×ÓÍøÖ·
+	//è¿™ä¸ªæˆå‘˜æ–¹æ³•ç”¨æ¥ç›®å½•ç½‘å€ä¸‹çš„çš„å­ç½‘å€
       public ArrayList<String> get_SonUrl(String fatherurl){
     	  
 			        ArrayList<String>  result = new ArrayList<>();
 			   		
 			 		  try{
 							 			Document doc = Jsoup.connect(fatherurl).get();
-							 			/* µÃµ½htmlµÄËùÓĞ¶«Î÷
+							 			/* å¾—åˆ°htmlçš„æ‰€æœ‰ä¸œè¥¿
 							 			Element content = doc.getElementById("content");
-							 			·ÖÀë³öhtmlÏÂ<img.../>Ö®¼äµÄËùÓĞ¶«Î÷
+							 			åˆ†ç¦»å‡ºhtmlä¸‹<img.../>ä¹‹é—´çš„æ‰€æœ‰ä¸œè¥¿
 							 		    Elements links = content.getElementsByTag("a");
 							 			 Elements links = doc.select("a[href]");
-							 		      À©Õ¹ÃûÎª.pngµÄÍ¼Æ¬
+							 		      æ‰©å±•åä¸º.pngçš„å›¾ç‰‡
 							 		    Elements pngs1 = doc.select("img[src$=.jpg]");*/
-							 		/*ÕÒµ½¸£Àû»ã×ÜÄ¿Â¼Ò³ÃæÖĞµÄclass = thumbµÄ±êÇ©  £¬¸ù¾İÒ³Ãæ·ÖÎö£¬Õâ¸ö±êÇ©¶ÔÓ¦µÄÊÇ½øÈë×ÓÒ³ÃæµÄÁ¬½Ó±êÇ©£¬href=¶ÔÓ¦µÄµØÖ·*/
+							 		/*æ‰¾åˆ°ç¦åˆ©æ±‡æ€»ç›®å½•é¡µé¢ä¸­çš„class = thumbçš„æ ‡ç­¾  ï¼Œæ ¹æ®é¡µé¢åˆ†æï¼Œè¿™ä¸ªæ ‡ç­¾å¯¹åº”çš„æ˜¯è¿›å…¥å­é¡µé¢çš„è¿æ¥æ ‡ç­¾ï¼Œhref=å¯¹åº”çš„åœ°å€*/
 							 			Elements pngs = doc.select("[class=thumb]");
 							 		
 							 			for (Element png : pngs) {
-							 				//»ñÈ¡µ½<a></a>ÀïÃæµÄµØÖ·hrefµÄÄÚÈİ
+							 				//è·å–åˆ°<a></a>é‡Œé¢çš„åœ°å€hrefçš„å†…å®¹
 							 			     String linkson = png.attr("href");
 							 			     
 							 			//     System.out.println(linkson+"^^^^^^^^^linkson");
@@ -77,7 +77,7 @@ class SimpleSpider {
 		 		
       }
       
-      //Õâ¸ö³ÉÔ±·½·¨ÓÃÀ´ÄÃ×ÓÍøÖ·ÄÚ²¿µÄËùÓĞÓĞĞ§Í¼Æ¬µØÖ·
+      //è¿™ä¸ªæˆå‘˜æ–¹æ³•ç”¨æ¥æ‹¿å­ç½‘å€å†…éƒ¨çš„æ‰€æœ‰æœ‰æ•ˆå›¾ç‰‡åœ°å€
       public ArrayList<String> get_ImgUrl(String url){
     	  
 						    	  ArrayList<String>  result = new ArrayList<>();
@@ -85,7 +85,7 @@ class SimpleSpider {
 						 		  try{
 										 			Document doc = Jsoup.connect(url).get();
 										 		
-										 		/*ÕÒµ½¸£Àû»ã×ÜÄ¿Â¼Ò³ÃæÖĞµÄclass = thumbµÄ±êÇ©  £¬¸ù¾İÒ³Ãæ·ÖÎö£¬Õâ¸ö±êÇ©¶ÔÓ¦µÄÊÇ½øÈë×ÓÒ³ÃæµÄÁ¬½Ó±êÇ©£¬href=¶ÔÓ¦µÄµØÖ·*/
+										 		/*æ‰¾åˆ°ç¦åˆ©æ±‡æ€»ç›®å½•é¡µé¢ä¸­çš„class = thumbçš„æ ‡ç­¾  ï¼Œæ ¹æ®é¡µé¢åˆ†æï¼Œè¿™ä¸ªæ ‡ç­¾å¯¹åº”çš„æ˜¯è¿›å…¥å­é¡µé¢çš„è¿æ¥æ ‡ç­¾ï¼Œhref=å¯¹åº”çš„åœ°å€*/
 										
 										 			Elements imgs = doc.select("img[src~=(?i)\\.(gif|jpe?g)]");
 										 			
@@ -107,7 +107,7 @@ class SimpleSpider {
 						 		    return result;	
 						      }
      
-     //Õâ¸ö³ÉÔ±·½·¨ÓÃÀ´ÏÂÒ»Ò³µÄ¸¸Ä¿Â¼µØÖ·ĞÅÏ¢
+     //è¿™ä¸ªæˆå‘˜æ–¹æ³•ç”¨æ¥ä¸‹ä¸€é¡µçš„çˆ¶ç›®å½•åœ°å€ä¿¡æ¯
       public String get_NextUrl(String url){
  		  
 			    	  String result = null;
@@ -116,7 +116,7 @@ class SimpleSpider {
 			 		
 							 			Document doc = Jsoup.connect(url).get();
 							 		
-							 		/*ÕÒµ½¸£Àû»ã×ÜÄ¿Â¼Ò³ÃæÖĞµÄclass = thumbµÄ±êÇ©  £¬¸ù¾İÒ³Ãæ·ÖÎö£¬Õâ¸ö±êÇ©¶ÔÓ¦µÄÊÇ½øÈë×ÓÒ³ÃæµÄÁ¬½Ó±êÇ©£¬href=¶ÔÓ¦µÄµØÖ·*/
+							 		/*æ‰¾åˆ°ç¦åˆ©æ±‡æ€»ç›®å½•é¡µé¢ä¸­çš„class = thumbçš„æ ‡ç­¾  ï¼Œæ ¹æ®é¡µé¢åˆ†æï¼Œè¿™ä¸ªæ ‡ç­¾å¯¹åº”çš„æ˜¯è¿›å…¥å­é¡µé¢çš„è¿æ¥æ ‡ç­¾ï¼Œhref=å¯¹åº”çš„åœ°å€*/
 							
 							 			Element nextUrl = doc.select("a.next").first();
 							 			
@@ -136,7 +136,7 @@ class SimpleSpider {
 		 			
 		 		
       }
-      //»ñÈ¡Õâ¸öÒ³ÃæµÄ±êÌâÃû³Æ title
+      //è·å–è¿™ä¸ªé¡µé¢çš„æ ‡é¢˜åç§° title
       public String get_Title(String url){
     	  
 					    	  String result = null;
@@ -144,7 +144,7 @@ class SimpleSpider {
 					 		  try{
 									 			Document doc = Jsoup.connect(url).get();
 									 		
-									 		/*ÕÒµ½¸£Àû»ã×ÜÄ¿Â¼Ò³ÃæÖĞµÄclass = thumbµÄ±êÇ©  £¬¸ù¾İÒ³Ãæ·ÖÎö£¬Õâ¸ö±êÇ©¶ÔÓ¦µÄÊÇ½øÈë×ÓÒ³ÃæµÄÁ¬½Ó±êÇ©£¬href=¶ÔÓ¦µÄµØÖ·*/
+									 		/*æ‰¾åˆ°ç¦åˆ©æ±‡æ€»ç›®å½•é¡µé¢ä¸­çš„class = thumbçš„æ ‡ç­¾  ï¼Œæ ¹æ®é¡µé¢åˆ†æï¼Œè¿™ä¸ªæ ‡ç­¾å¯¹åº”çš„æ˜¯è¿›å…¥å­é¡µé¢çš„è¿æ¥æ ‡ç­¾ï¼Œhref=å¯¹åº”çš„åœ°å€*/
 									
 									 	//		Elements title = content.getElementsByTag("title");
 									 			Elements title = doc.select("title");
@@ -164,7 +164,7 @@ class SimpleSpider {
    
       
       
-      //Õâ¸ö³ÉÔ±·½·¨ÓÃÀ´ÏÂÔØËùÓĞÊı¾İ£¨HTMLÒ³Ãæ£¬»òÕßÍ¼Æ¬£¬»òÕßÎÄ×Ö£©
+      //è¿™ä¸ªæˆå‘˜æ–¹æ³•ç”¨æ¥ä¸‹è½½æ‰€æœ‰æ•°æ®ï¼ˆHTMLé¡µé¢ï¼Œæˆ–è€…å›¾ç‰‡ï¼Œæˆ–è€…æ–‡å­—ï¼‰
       public  int  save_Data(String url,String dirfile,String sonfile,int i){
 					  		
 					  		File dest = null;
@@ -177,12 +177,12 @@ class SimpleSpider {
 					  		
 					  		try{
 					  			                File destdad = new File(dirfile+"/"+sonfile.substring(0,13 ));
-					  			                //´´½¨Ò»¸öĞÂµÄÎÄ¼ş¼Ğ
+					  			                //åˆ›å»ºä¸€ä¸ªæ–°çš„æ–‡ä»¶å¤¹
 					  			                destdad.mkdir();
-					  			                //ÕâÀï¶ÔÎÄ¼şÃû½øĞĞ±ê¼Ç£¬ÔİÊ±ÓÃhashcodeÖµ:
-									  		    dest =new File(destdad.getAbsolutePath()+"/ÃÀÅ®Í¼Æ¬"+i+datetype);
+					  			                //è¿™é‡Œå¯¹æ–‡ä»¶åè¿›è¡Œæ ‡è®°ï¼Œæš‚æ—¶ç”¨hashcodeå€¼:
+									  		    dest =new File(destdad.getAbsolutePath()+"/ç¾å¥³å›¾ç‰‡"+i+datetype);
 									  			
-									  			//´´½¨Á÷À´±£´æ
+									  			//åˆ›å»ºæµæ¥ä¿å­˜
 									  			InputStream is;
 									  			
 									  			FileOutputStream fos = new FileOutputStream(dest);
@@ -203,7 +203,7 @@ class SimpleSpider {
 									  				
 									  					fos.write(buf,0,lenth);
 									  			}
-									  			//¹Ø±Õ×ÊÔ´
+									  			//å…³é—­èµ„æº
 									  			bos.close();
 									  			
 									  			fos.close();
@@ -212,12 +212,12 @@ class SimpleSpider {
 					  		}
 					  		catch(IOException e){
 					  			
-					  			                System.out.println("ÏÂÔØÒì³££¡");
+					  			                System.out.println("ä¸‹è½½å¼‚å¸¸ï¼");
 					  			                
 					  							e.printStackTrace();
 					  			
 					  		}
-					  		//ÔÙÓÃ¹ıÂËÆ÷ÊµÏÖ
+					  		//å†ç”¨è¿‡æ»¤å™¨å®ç°
 					  /*		dest.listFiles(new FileFilter(){
 					
 								@Override
@@ -234,7 +234,7 @@ class SimpleSpider {
 					  			
 					  		});*/
 					  	
-					  		  //Èç¹ûÎÄ¼şĞ¡ÓÚ50kbÔòÉ¾³ıËü
+					  		  //å¦‚æœæ–‡ä»¶å°äº50kbåˆ™åˆ é™¤å®ƒ
 						  		if(dest.length()<1024*50){
 									
 						  			dest.delete();
